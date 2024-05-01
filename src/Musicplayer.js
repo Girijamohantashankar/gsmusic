@@ -154,7 +154,6 @@ const MusicPlayer = () => {
 
 
   useEffect(() => {
-    // First useEffect block
     if (audioRef.current) {
       audioRef.current.onloadeddata = () => {
         // setAudioLoaded(true);
@@ -170,7 +169,7 @@ const MusicPlayer = () => {
       };
       audioRef.current.onended = handleNext;
     }
-  }, [audioRef, songs, currentSongIndex]);
+  }, [audioRef, songs, currentSongIndex, handleNext]); 
 
 
 
