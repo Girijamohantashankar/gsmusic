@@ -174,13 +174,6 @@ const MusicPlayer = () => {
 
 
 
-  // Function to handle volume change
-  const handleVolumeChange = (e) => {
-    const newVolume = parseFloat(e.target.value);
-    if (!isNaN(newVolume) && isFinite(newVolume)) {
-      audioRef.current.volume = newVolume;
-    }
-  };
 
 
 
