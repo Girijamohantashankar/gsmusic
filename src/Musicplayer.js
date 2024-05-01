@@ -104,13 +104,13 @@ const MusicPlayer = () => {
   const handleNext = () => {
     const newIndex = (currentSongIndex + 1) % songs.length;
     setCurrentSongIndex(newIndex);
-
+  
     setCurrentSongImage(songs[newIndex]?.image || "");
     audioRef.current.src = songs[newIndex]?.audio || "";
     audioRef.current.addEventListener("loadeddata", () => {
       handlePlay();
     });
-
+  
     if (audioRef.current.readyState >= 2) {
       handlePlay();
     }
@@ -169,7 +169,7 @@ const MusicPlayer = () => {
       };
       audioRef.current.onended = handleNext;
     }
-  }, [handleNext]); // Add handleNext as a dependency
+  }, []);
   
   
   
