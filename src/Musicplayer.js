@@ -13,7 +13,7 @@ const MusicPlayer = () => {
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const audioRef = useRef(null);
-  const [audioLoaded, setAudioLoaded] = useState(false);
+  // const [audioLoaded, setAudioLoaded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [volume, setVolume] = useState(0.5);
@@ -156,7 +156,7 @@ const MusicPlayer = () => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.onloadeddata = () => {
-        setAudioLoaded(true);
+        // setAudioLoaded(true);
       };
       audioRef.current.onplay = () => {
         setIsPlaying(true);
@@ -332,7 +332,7 @@ const MusicPlayer = () => {
         <audio
           id="audio"
           ref={audioRef}
-          onLoadedData={() => setAudioLoaded(true)}
+          // onLoadedData={() => setAudioLoaded(true)}
           onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
           onDurationChange={() => setDuration(audioRef.current.duration)}
         ></audio>
