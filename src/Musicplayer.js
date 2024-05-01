@@ -169,7 +169,7 @@ const MusicPlayer = () => {
       };
       audioRef.current.onended = handleNext;
     }
-  }, [audioRef, songs, currentSongIndex, handleNext]); 
+  }, [audioRef.current, handleNext]); 
 
 
 
