@@ -169,7 +169,8 @@ const MusicPlayer = () => {
       };
       audioRef.current.onended = handleNext;
     }
-  }, [audioRef.current, handleNext]); 
+  }, [handleNext]); // Adjusted dependencies
+  
 
 
 
