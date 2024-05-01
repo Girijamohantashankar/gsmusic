@@ -154,6 +154,7 @@ const MusicPlayer = () => {
 
 
   useEffect(() => {
+    // First useEffect block
     if (audioRef.current) {
       audioRef.current.onloadeddata = () => {
         // setAudioLoaded(true);
