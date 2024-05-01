@@ -2,9 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import "./Musicplayer.css";
 import PopupMessage from "./PopupMessage";
 
-
-
-
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -20,15 +17,10 @@ const MusicPlayer = () => {
   const [showPopup, setShowPopup] = useState(true);
   const [showPopupMessage, setShowPopupMessage] = useState(false);
 
-
-
-
   // Function to handle closing the popup
   const handleOk = () => {
     setShowPopup(false);
   };
-
-
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -44,9 +36,7 @@ const MusicPlayer = () => {
     };
   }, []);
 
-
-
-// Fetch The api backend
+  // Fetch The api backend
   useEffect(() => {
     fetch("https://gsmusic-api.onrender.com/api/songs/")
       .then((response) => {
@@ -67,10 +57,7 @@ const MusicPlayer = () => {
       .catch((error) => console.error("Error fetching songs:", error));
   }, [currentSongIndex]);
 
-
-
-
-// Loacl storage Save the index value
+  // Loacl storage Save the index value
   useEffect(() => {
     const storedIndex = localStorage.getItem("currentSongIndex");
     if (storedIndex !== null) {
@@ -81,8 +68,6 @@ const MusicPlayer = () => {
   useEffect(() => {
     localStorage.setItem("currentSongIndex", String(currentSongIndex));
   }, [currentSongIndex]);
-
-
 
   // Function to handle playing the current song
   const handlePlay = () => {
@@ -98,25 +83,21 @@ const MusicPlayer = () => {
     }
   };
 
-
-
   // Function to play the next song
   const handleNext = () => {
     const newIndex = (currentSongIndex + 1) % songs.length;
     setCurrentSongIndex(newIndex);
-  
+
     setCurrentSongImage(songs[newIndex]?.image || "");
     audioRef.current.src = songs[newIndex]?.audio || "";
     audioRef.current.addEventListener("loadeddata", () => {
       handlePlay();
     });
-  
+
     if (audioRef.current.readyState >= 2) {
       handlePlay();
     }
   };
-
-
 
   // Function to play the previous song
   const handlePrevious = () => {
@@ -136,9 +117,6 @@ const MusicPlayer = () => {
     }
   };
 
-
-
-
   // Function to handle play/pause toggle
   const playPauseToggle = () => {
     if (isPlaying) {
@@ -149,9 +127,6 @@ const MusicPlayer = () => {
       setIsPlaying(true);
     }
   };
-
-
-
 
   useEffect(() => {
     if (audioRef.current) {
@@ -169,23 +144,12 @@ const MusicPlayer = () => {
       };
       audioRef.current.onended = handleNext;
     }
-  }, []);
-  
-  
-  
-
-
-
-
-
-
-
+  }, [handleNext]); // Add handleNext as a dependency
 
   // Function to handle progress change
   const handleProgressChange = (e) => {
     audioRef.current.currentTime = (e.target.value * duration) / 100;
   };
-
 
   // Showing the list of songs
   function setVal() {
@@ -205,7 +169,6 @@ const MusicPlayer = () => {
     Searchbtn.classList.remove("showlist1");
   }
 
-
   // Volume Function
   const fwa = (event) => {
     const newVolume = parseFloat(event.target.value);
@@ -215,8 +178,6 @@ const MusicPlayer = () => {
       audioRef.current.volume = newVolume;
     }
   };
-
-
 
   // Filter songs based on search query and selected category
   const filteredSongs = songs.filter((song) => {
@@ -228,7 +189,6 @@ const MusicPlayer = () => {
     return matchesSearch && matchesCategory;
   });
 
-
   const handleSongClick = (index) => {
     const Searchbtn = document.querySelector(".song_filter");
     Searchbtn.classList.remove("showlist1");
@@ -239,8 +199,6 @@ const MusicPlayer = () => {
       handlePlay();
     };
   };
-
-
 
   useEffect(() => {
     if (songs.length > 0) {
@@ -264,8 +222,6 @@ const MusicPlayer = () => {
       return text.substring(0, maxLength) + "...";
     }
   };
-
-
 
   return (
     <div className="music-container">
